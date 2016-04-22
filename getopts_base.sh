@@ -58,6 +58,7 @@ echo "bucket_name:"$bucket_name
 
 if [ $help -ne 0 ]; then
 	usage
+	exit 0
 fi
 
 if [ -z $config_file ]; then
@@ -81,4 +82,4 @@ if [ -z $bucket_name ]; then
 	exit 1
 fi
 
-# And, finally do your stuff here.
+
