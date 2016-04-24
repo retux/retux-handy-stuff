@@ -2,7 +2,8 @@
 # jsonobjs.sh: Json as complex data structures for Bash
 #
 #  Use hash or dictionaries in bash is quite hard and complex,
-#    My friend @kaminoo gave me a simple but powerfull idea for
+#    My friend @kaminoo https://github.com/kaminoo
+#    gave me a simple yet powerfull idea for
 #    this: why not to use json objects to represents complex objets
 #    or data structures in bash. This is handy when you need to stick
 #    to bash and not to move to more powerfull scripting languages like
