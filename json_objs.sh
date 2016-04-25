@@ -26,7 +26,8 @@ function usage {
 	echo
 	echo "If directory not provided will list current working dir."
 	echo "Once you have the file ls in json you can use jq to filter. Examples:"
-	echo "./json_objs.sh | jq \'.[].date\'"
+	echo "./json_objs.sh | jq '.[].date'"
+	echo "this commit is tested wrong."
 	exit 1
 }
 
