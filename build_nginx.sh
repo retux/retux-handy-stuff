@@ -14,21 +14,21 @@ function check_dependencies {
     echo "# visudo"
     echo "Add at the bottom of the file: your_username_here ALL=(ALL)       ALL"
 	
-	echo
-	if [ ! $(type -P gzip) ]; then
-	    echo "[error] Gzip bin was not found. Stopped!"
-		exit 1
-	fi
+    echo
+    if [[ ! -x /usr/bin/gzip ]]; then
+        echo "[error] gzip bin was not found. Stopped!"
+        exit 1
+    fi
 	
-	if [ ! $(type -P unzip) ]; then
-	    echo "[error] Gzip bin was not found. Stopped!"
-		exit 1
-	fi
+    if [ ! $(type -P unzip) ]; then
+        echo "[error] unzip bin was not found. Stopped!"
+        exit 1
+    fi
 	
-	if [ ! $(type -P wget) ]; then
-	    echo "[error] Gzip bin was not found. Stopped!"
-		exit 1
-	fi
+    if [ ! $(type -P wget) ]; then
+        echo "[error] wget bin was not found. Stopped!"
+	exit 1
+    fi
 }
 
 
@@ -36,7 +36,7 @@ function install_predependencies {
     cd ${WORKING_DIR}
     echo "Install Development Tools"
     sudo dnf group install -y 'Development Tools'
-    sudo dnf install unzip wget
+    sudo dnf install unzip wget gcc-c++
     echo "Install Extra Packages"
     echo "----------------------"
 	echo
@@ -92,6 +92,7 @@ function download_nginx {
 
 
 function build_nginx {
+    cd ${WORKING_DIR}
     # // If extra modules are needed add them to this function.
     echo "[info] cd into NGINX source directory, and start build:"
     cd ./nginx-${NGINX_VERSION}
@@ -159,7 +160,7 @@ function build_nginx {
             --with-openssl=../openssl-1.1.0f \
             --with-openssl-opt=no-nextprotoneg \
             --with-debug \
-			--add-module=./nginx-module-vts-master
+            --add-module=${WORKING_DIR}/nginx-module-vts-master
     make 
     sudo make install
 
