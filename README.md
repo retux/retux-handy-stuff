@@ -22,7 +22,7 @@ Will download both bootstrap and jquery and copy them to you current directory.
 
 and:
 
-create_bs4_project.sh --use-cdn
+create_bs4_project.sh --cdn
 
 Will create index.html and use bootstrap and jquery from its CDNs.
 
