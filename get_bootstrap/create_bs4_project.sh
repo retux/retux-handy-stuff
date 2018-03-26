@@ -15,7 +15,8 @@ function use_dist_files {
     echo "[info] Downloading bootstrap"
     if [[ ! -f /tmp/bootstrap.zip ]]
     then
-        wget -O /tmp/bootstrap.zip http://getbootstrap.com/2.3.2/assets/bootstrap.zip
+        mkdir /tmp/bootstrap
+        wget -O /tmp/bootstrap/bootstrap.zip https://github.com/twbs/bootstrap/releases/download/v4.0.0/bootstrap-4.0.0-dist.zip
     else
         echo "[info] File already exists, I won't download it."
     fi
@@ -25,8 +26,7 @@ function use_dist_files {
     else
         echo "[info] Jquery file already exists, I won't download it."
     fi
-    wget -O /tmp/index.html https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-bare/master/index.html 
-    pushd /tmp
+    pushd /tmp/bootstrap
     unzip -o bootstrap.zip
     popd
     mkdir -p vendor/bootstrap
@@ -36,8 +36,6 @@ function use_dist_files {
         cp -a /tmp/bootstrap/${each} vendor/bootstrap
     done
     cp /tmp/jquery-migrate-3.0.0.min.js vendor/jquery/jquery.min.js
-    cp /tmp/index.html .   
-    sed -i 's/bootstrap\.bundle\.min\.js/bootstrap\.min\.js/g' index.html
     pwd
     create_index_local
 }
@@ -51,6 +49,7 @@ function release_resources {
 
 
 function use_cdn {
+    touch index.html
     tee index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +73,11 @@ function use_cdn {
     <![endif]-->
 </head>
 <body>
-    <h1>Hello, world!</h1>
+     <div class="container">
+        <div class="jumbotron">
+            <h2>Hello, bootstrap!</h2>
+        </div>
+     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- If you wanna use jquery over CDN -->
@@ -89,6 +92,7 @@ EOF
 
 
 function create_index_local {
+    touch index.html
     tee index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +104,7 @@ function create_index_local {
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -110,7 +114,11 @@ function create_index_local {
     <![endif]-->
 </head>
 <body>
-    <h1>Hello, world!</h1>
+     <div class="container">
+        <div class="jumbotron">
+            <h2>Hello, bootstrap!</h2>
+        </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- If you wanna use jquery over CDN -->
